@@ -1,0 +1,4 @@
+app/core/secrets/secret.json
+__pycache__
+secrets
+.env

@@ -1,0 +1,7 @@
+fastapi==0.101.0
+uvicorn==0.23.2
+firebase-admin==6.2.0
+pyrebase4==4.7.1
+pydantic-settings==2.0.2
+nltk==3.6.3
+python-decouple==3.8
