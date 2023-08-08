@@ -1,10 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
-from app.schemas.calls_schema import IncomingCallsModel
-from fastapi import Depends
 from firebase_admin import auth
-
-from app.services.calls_service import CallsService
-from app.services.user_service import UserService
 
 
 users_router = APIRouter()

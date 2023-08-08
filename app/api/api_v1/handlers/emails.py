@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
-from app.schemas.calls_schema import IncomingCallsModel
 from fastapi import Depends
+from app.schemas.email_schema import IncomingEmailsModel
 
 from app.services.user_service import UserService
 from app.services.calls_service import CallsService
@@ -10,7 +10,7 @@ from app.services.calls_service import CallsService
 calls_router = APIRouter()
 
 @calls_router.post('/incoming', summary="Incoming call")#, response_model=UserOut)
-async def check_incoming_call_spam(data: IncomingCallsModel):
+async def check_incoming_email_spam(data: IncomingEmailsModel):
     try:
         is_valid_user = await UserService.authenticate(data.called_phone_number)
     
@@ -21,10 +21,10 @@ async def check_incoming_call_spam(data: IncomingCallsModel):
         # TODO: check if number is in database
         
         # Run algorithm to check spam
-        return  {'spamStaus':'Spam', 'message':'user is spam'} # await CallsService.evaluate_spam()
+        return {'spamStatus': 'Spam', 'message': 'user is spam'}
     
-    except :
+    except:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Something went wrong in Calls service"
+            detail="Something went wrong in Emails service"
         )

@@ -4,34 +4,20 @@ import random
 
 class SmsService:
     @staticmethod
-    async def is_spam(content: str) -> bool:
-        
-        return "spam" in content.lower()
-
-    @staticmethod
     async def evaluate_spam_message(message_content: str) -> str:
-        is_spam_result = await SmsService.is_spam(message_content)
+        # is_spam_result = 'spam' in message_content
         
-        if is_spam_result:
-            return "Spam"
-        else:
-            return "Not Spam"
+        # if is_spam_result:
+        #     return "Spam"
+        # else:
+        return "Not Spam"
         
     
     @staticmethod
     async def Calculate_score(text:str):
-        score = ""
+        score = "0.5"
         
         return str(score)
-
-        
-        
-        
-        
-        
-        
-        
-        
         
         
         
