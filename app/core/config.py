@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 
 class Settings(BaseSettings):
+    load_dotenv(dotenv_path='app/core/.env')
     API_V1_STR: str = "/api/v1"
     
     # BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = [
