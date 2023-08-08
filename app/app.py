@@ -29,7 +29,7 @@ app.include_router(router, prefix=settings.API_V1_STR)
 
 @app.get('/')
 async def index():
-    return 'hello'
+    return 'Welcome to Nischal Backend API'
 
 
 if __name__ == '__main__':
