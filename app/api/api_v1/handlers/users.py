@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from firebase_admin import auth
 
-
 users_router = APIRouter()
 
 @users_router.get('/all', summary="all users")#, response_model=UserOut)

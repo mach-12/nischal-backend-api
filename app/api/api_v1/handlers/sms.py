@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
 from app.schemas.message_schema import IncomingMessagesModel
-from fastapi import Depends
 
 from app.services.user_service import UserService
 from app.services.sms_service import SmsService  # Assuming you have a messages_service module
@@ -18,12 +17,12 @@ async def check_incoming_message_spam(data: IncomingMessagesModel):
 
         # Check if the user is valid
         if is_valid_user:
-            return {'spamStatus': 'Ham', 'message': 'User is verified'}
+            return {'spamStaus':'Ham', 'spamScore':'0.15', 'message': 'User is verified'}
             
         # TODO: Check if the number is in the database (if needed)
         
         # Run algorithm to check spam using MessagesService
-        return await {'spamStatus': 'Spam', 'message': 'user is spam'}
+        return {'spamStaus':'Spam', 'spamScore':'0.62', 'message': 'user is spam'}
     
     except Exception as error:
         raise HTTPException(

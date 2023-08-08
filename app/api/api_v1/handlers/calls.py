@@ -1,6 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
 from app.schemas.calls_schema import IncomingCallsModel
-from fastapi import Depends
 
 from app.services.user_service import UserService
 from app.services.calls_service import CallsService
@@ -16,12 +15,12 @@ async def check_incoming_call_spam(data: IncomingCallsModel):
     
         # check if is valid user
         if is_valid_user:
-            return {'spamStaus':'Ham', 'message':'user is verified'}
+            return {'spamStaus':'Ham', 'spamScore':'0.09', 'message':'user is verified'}
             
         # TODO: check if number is in database
         
         # Run algorithm to check spam
-        return  {'spamStaus':'Spam', 'message':'user is spam'} # await CallsService.evaluate_spam()
+        return  {'spamStaus':'Spam', 'spamScore':'0.94', 'message':'user is spam'} # await CallsService.evaluate_spam()
     
     except :
         raise HTTPException(

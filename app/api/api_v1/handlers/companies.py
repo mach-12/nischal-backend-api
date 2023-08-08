@@ -1,5 +1,4 @@
 from fastapi import APIRouter, HTTPException, status
-from fastapi import Depends
 from app.schemas.companies_schema import RegisterCompanyModel
 
 
