@@ -1,3 +1,4 @@
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
@@ -8,7 +9,7 @@ import string
 class SpamDetection():
     pipe = None
     model = None
-    
+    nltk.download('punkt')
     def __init__(self) -> None:
         pipe_path = os.path.join(os.getcwd(), 'C:/Users/inher/OneDrive/Desktop/kavach-files/nischal-backend-api/app/spam-detection/model exports/pipe.pkl')
         pipe_file = open(pipe_path,'rb')
