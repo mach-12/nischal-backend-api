@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
-from app.schemas.companies_schema import RegisterCompanyModel
+from app.schemas.companies_schema import CompanyAPICallModel, RegisterCompanyModel
 
 
 
@@ -21,6 +21,17 @@ async def get_all_companies(data):
 async def register_company(data: RegisterCompanyModel):
     try:
         return {'message': f'registered company {data.company_name}'}
+    
+    except:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Something went wrong in Companies service"
+        )
+    
+@companies_router.post('/send_message', summary="company can send messages to user for certain time period")#, response_model=UserOut)
+async def register_company(data: CompanyAPICallModel):
+    try:
+        return {'message': 'success'}
     
     except:
         raise HTTPException(
