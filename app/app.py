@@ -5,6 +5,7 @@ from firebase_admin import credentials
 import uvicorn
 from app.core.config import settings
 from app.api.api_v1.router import router
+import nltk 
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -18,6 +19,10 @@ async def app_init():
     """
         initialize crucial application services
     """
+
+    nltk.download('punkt')
+    nltk.download('stopwords')
+
     global firebase
     if not firebase_admin._apps:
         cred = credentials.Certificate(settings.CERTIFICATE)
