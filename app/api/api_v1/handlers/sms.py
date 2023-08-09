@@ -6,6 +6,12 @@ from app.services.sms_service import SmsService  # Assuming you have a messages_
 from app.services.text_spam_service import TextSpamService
 messages_router = APIRouter()
 
+# Normal,0
+# Phishing,1
+# Scams,2
+# Spoofing,3
+# Subscriptions,4
+
 @messages_router.post('/incoming', summary="Incoming message")
 async def check_incoming_message_spam(data: IncomingMessagesModel):
     try:

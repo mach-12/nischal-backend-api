@@ -9,7 +9,6 @@ async def check_incoming_call_spam():
         users = auth.list_users().iterate_all()
         users = [user.phone_number for user in users]
 
-
         return users #CallsService.evaluate_spam()
     except :
         raise HTTPException(

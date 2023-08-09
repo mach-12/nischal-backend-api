@@ -9,21 +9,13 @@ class TextSpamService:
     @staticmethod
     async def evaluate_spam_message(message_content: str) -> str:
         sd = SpamDetection()
-        return sd.predict(message_content)
-    
-    @staticmethod
-    async def Calculate_score(text:str):
-        score = "0.5"
-        
-        return str(score)
-        
+        return sd.predict(message_content)        
 
 class SpamDetection():
     pipe = None
     model = None
     
     def __init__(self) -> None:
-        nltk.download('stopwords')
         pipe_file = open("app/services/model exports/pipe.pkl",'rb')
         self.pipe = pickle.load(pipe_file)
         pipe_file.close()

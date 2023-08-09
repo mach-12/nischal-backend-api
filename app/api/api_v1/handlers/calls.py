@@ -4,7 +4,12 @@ from app.schemas.calls_schema import IncomingCallsModel
 from app.services.user_service import UserService
 from app.services.calls_service import CallsService
 
-
+# Normal,0
+# Robocalls,1
+# Scams,2
+# Caller ID Spoofing,3
+# Tech Support Scams,4
+# Debt Collection,5
 
 calls_router = APIRouter()
 
@@ -13,10 +18,6 @@ async def check_incoming_call_spam(data: IncomingCallsModel):
     try:
         # is_valid_user = await UserService.authenticate(data.called_phone_number)
     
-        # check if is valid user
-        # if is_valid_user:
-        #     return {'spamStaus':'Ham', 'spamScore':'0.09', 'message':'user is verified'}
-            
         # TODO: check if number is in database
         
         # Run algorithm to check spam

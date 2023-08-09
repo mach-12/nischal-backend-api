@@ -5,18 +5,18 @@ from app.services.user_service import UserService
 
 email_router = APIRouter()
 
-@email_router.post('/incoming', summary="Incoming call")#, response_model=UserOut)
+# Normal,0
+# Phishing,1
+# Scams,2
+# Advertisements,3
+# Malware and Virus,4
+
+@email_router.post('/incoming', summary="Incoming email")#, response_model=UserOut)
 async def check_incoming_email_spam(data: IncomingEmailsModel):
     try:
         # is_valid_user = await UserService.authenticate(data.called_phone_number)
         
         model_output = await text_spam_service.evaluate_spam_message(message_content=data.message)
-        
-        # check if is valid user
-        # if is_valid_user:
-        #     return {'spamStaus':'Ham', 'spamScore':'0.11', 'message':'user is verified'}
-            
-        # TODO: check if number is in database
         
         # Run algorithm to check spam
         spamStatus = 'Spam' if model_output['spam'] else 'Ham'
@@ -27,3 +27,7 @@ async def check_incoming_email_spam(data: IncomingEmailsModel):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Something went wrong in Emails service"
         )
+    
+
+
+

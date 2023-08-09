@@ -10,15 +10,4 @@ import random
 class CallsService:
     @staticmethod
     async def evaluate_spam():
-        
-        
-        
-        
-        
-        
-        
-        """if is_spam:
-            return {'spamStatus':'Spam', 'message':'model output'}
-        else:
-            return {'spamStatus':'Ham', 'message':'model output'}
-"""
+        return ''
