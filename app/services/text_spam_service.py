@@ -1,6 +1,7 @@
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
+import nltk
 import pickle
 import string
 
@@ -22,6 +23,7 @@ class SpamDetection():
     model = None
     
     def __init__(self) -> None:
+        nltk.download()
         pipe_file = open("app/services/model exports/pipe.pkl",'rb')
         self.pipe = pickle.load(pipe_file)
         pipe_file.close()
