@@ -11,7 +11,7 @@ class SmsService:
         #     return "Spam"
         # else:
         return "Not Spam"
-        
+
     
     @staticmethod
     async def Calculate_score(text:str):

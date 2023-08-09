@@ -11,6 +11,8 @@ pyrebase4 = "*"
 pydantic-settings = "*"
 nltk = "*"
 python-decouple = "*"
+scikit-learn = "*"
+xgboost = "*"
 
 [dev-packages]
 

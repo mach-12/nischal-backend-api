@@ -1,6 +1,7 @@
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
+import os
 import pickle
 import string
 
@@ -9,11 +10,13 @@ class SpamDetection():
     model = None
     
     def __init__(self) -> None:
-        pipe_file = open("model_exports/pipe.pkl",'rb')
+        pipe_path = os.path.join(os.getcwd(), 'C:/Users/inher/OneDrive/Desktop/kavach-files/nischal-backend-api/app/spam-detection/model exports/pipe.pkl')
+        pipe_file = open(pipe_path,'rb')
         self.pipe = pickle.load(pipe_file)
         pipe_file.close()
 
-        model_file = open("model_exports/model.pkl",'rb')
+        model_path = os.path.join('C:/Users/inher/OneDrive/Desktop/kavach-files/nischal-backend-api/app/spam-detection/model exports/model.pkl')
+        model_file = open(model_path,'rb')
         self.model = pickle.load(model_file)
         model_file.close()
 
@@ -24,7 +27,6 @@ class SpamDetection():
         words = word_tokenize(x.lower())
         final = []
         
-        #x = x.replace('\n', ' ').replace('\r', '')
         for word in words :     
             if word.isalnum():
                 final.append(word)
@@ -33,7 +35,7 @@ class SpamDetection():
         stop_words = set(stopwords.words('english'))
 
         for i in words :
-            if i not in stop_words and i not in string.punctuation :
+            if i not in stop_words and i not in string.punctuation:
                 final.append(i)
         words = final[:]
         final= []
@@ -50,12 +52,14 @@ class SpamDetection():
             return 0
         
         # preprocess
-        transformed_sms = self.basic_clean(text)
-        print(transformed_sms)
+        transformed_text = self.basic_clean(text)
+        print(transformed_text)
 
         # vectorize
-        vector_input = self.pipe.transform([transformed_sms])
+        vector_input = self.pipe.transform([transformed_text])
         
         # predict
-        result = str(self.model.predict_proba(vector_input)[0][1] )
-        return result
+        result = self.model.predict_proba(vector_input)[0][1] 
+        return {'riskScore':str(result), 'spam':result > 0.5}
+    
+sd = SpamDetection()

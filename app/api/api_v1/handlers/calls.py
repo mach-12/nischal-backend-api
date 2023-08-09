@@ -11,11 +11,11 @@ calls_router = APIRouter()
 @calls_router.post('/incoming', summary="Incoming call")#, response_model=UserOut)
 async def check_incoming_call_spam(data: IncomingCallsModel):
     try:
-        is_valid_user = await UserService.authenticate(data.called_phone_number)
+        # is_valid_user = await UserService.authenticate(data.called_phone_number)
     
         # check if is valid user
-        if is_valid_user:
-            return {'spamStaus':'Ham', 'spamScore':'0.09', 'message':'user is verified'}
+        # if is_valid_user:
+        #     return {'spamStaus':'Ham', 'spamScore':'0.09', 'message':'user is verified'}
             
         # TODO: check if number is in database
         
