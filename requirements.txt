@@ -5,3 +5,5 @@ pyrebase4==4.7.1
 pydantic-settings==2.0.2
 nltk==3.6.3
 python-decouple==3.8
+xgboost==1.7.6
+scikit-learn==1.3.0
