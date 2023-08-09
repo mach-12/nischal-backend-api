@@ -23,7 +23,7 @@ class SpamDetection():
     model = None
     
     def __init__(self) -> None:
-        nltk.download()
+        nltk.download('punkt')
         pipe_file = open("app/services/model exports/pipe.pkl",'rb')
         self.pipe = pickle.load(pipe_file)
         pipe_file.close()

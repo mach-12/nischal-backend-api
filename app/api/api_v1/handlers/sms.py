@@ -30,5 +30,5 @@ async def check_incoming_message_spam(data: IncomingMessagesModel):
     except Exception as error:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Something went wrong in Messages service {error}"
+            detail=f"Something went wrong in Messages service \n{error}"
         )
