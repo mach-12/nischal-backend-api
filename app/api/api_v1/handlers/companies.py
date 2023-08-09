@@ -1,40 +1,52 @@
 from fastapi import APIRouter, HTTPException, status
 from app.schemas.companies_schema import CompanyAPICallModel, RegisterCompanyModel
-
-
+from firebase_admin import firestore
 
 companies_router = APIRouter()
 
-@companies_router.get('/list', summary="get companies")#, response_model=UserOut)
-async def get_all_companies(data):
-    try:
-        all_companies = {'company_id': ['1312', '5234', '8928']} 
-        return all_companies
-    
-    except:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Something went wrong in  service"
-        )
-    
-@companies_router.post('/register', summary="register company to api")#, response_model=UserOut)
+# Define endpoint to register a company
+@companies_router.post('/register', summary="register company to api")
 async def register_company(data: RegisterCompanyModel):
     try:
-        return {'message': f'registered company {data.company_name}'}
+        firestore_client = firestore.client()  # Initialize Firebase
+        
+        # Create a document in "company_registration" collection
+        registration_data = {
+            'verification_document': data.verification_document,
+            'company_name': data.company_name,
+            'service_type': data.service_type
+        }
+        firestore_client.collection("company_registration").add(registration_data)
+        
+        return {'message': f'Registered company {data.company_name}'}
     
-    except:
+    except Exception as exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Something went wrong in Companies service"
+            detail=f"Something went wrong in Companies service: {exception}"
         )
-    
-@companies_router.post('/send_message', summary="company can send messages to user for certain time period")#, response_model=UserOut)
-async def register_company(data: CompanyAPICallModel):
+
+# Define endpoint to send a message from a company
+@companies_router.post('/send_message', summary="company can send messages to user for certain time period")
+async def send_company_message(data: CompanyAPICallModel):
     try:
-        return {'message': 'success'}
+        firestore_client = firestore.client()  # Initialize Firebase
+        
+        # Create a document in "company_requests" collection
+        request_data = {
+            'company_name': data.company_name,
+            'user_number': data.user_number,
+            'company_number': data.company_number,
+            'start_time': data.start_time,
+            'validity': data.validity,
+            'message': data.message
+        }
+        firestore_client.collection("company_requests").add(request_data)
+        
+        return {'message': 'Success'}
     
-    except:
+    except Exception as exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Something went wrong in Companies service"
+            detail=f"Something went wrong in Companies service: {exception}"
         )

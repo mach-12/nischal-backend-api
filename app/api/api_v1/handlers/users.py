@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
-from firebase_admin import auth
+from firebase_admin import auth, firestore
 
 users_router = APIRouter()
 

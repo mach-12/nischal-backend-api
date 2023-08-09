@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 import pyrebase
 import firebase_admin
-from firebase_admin import credentials
+
+from firebase_admin import credentials, firestore, db
 import uvicorn
 from app.core.config import settings
 from app.api.api_v1.router import router
@@ -13,6 +14,7 @@ app = FastAPI(
 )
 
 firebase = None
+# db = None
 
 @app.on_event("startup")
 async def app_init():
@@ -27,7 +29,6 @@ async def app_init():
     if not firebase_admin._apps:
         cred = credentials.Certificate(settings.CERTIFICATE)
         firebase_admin.initialize_app(cred)
-
     firebase = pyrebase.initialize_app(settings.FIREBASE_CONFIG)
 
 app.include_router(router, prefix=settings.API_V1_STR)
